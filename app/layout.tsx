@@ -1,19 +1,20 @@
 import type { Metadata } from "next";
-import { Cardo, Inter } from "next/font/google";
+import { Fraunces, Nunito } from "next/font/google";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 import "./globals.css";
 
-const inter = Inter({
+const nunito = Nunito({
   variable: "--font-body",
   subsets: ["latin"],
 });
 
-const cardo = Cardo({
+// Fraunces' SOFT axis rounds off the serifs; set in globals.css
+const fraunces = Fraunces({
   variable: "--font-heading",
   subsets: ["latin"],
-  weight: ["400", "700"],
   style: ["normal", "italic"],
+  axes: ["SOFT", "opsz"],
 });
 
 export const metadata: Metadata = {
@@ -26,7 +27,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en" className={`${inter.variable} ${cardo.variable}`}>
+    <html lang="en" className={`${nunito.variable} ${fraunces.variable}`}>
       <body>
         <a className="skip-link" href="#main">
           Skip to content

@@ -464,3 +464,38 @@ export const history: HistoryYear[] = [
     ]
   }
 ];
+
+export type Era = {
+  id: string;
+  title: string;
+  from: number;
+  to: number;
+  summary: string;
+};
+
+export const eras: Era[] = [
+  {
+    id: "the-ragg-estate",
+    title: "The Ragg estate",
+    from: 1934,
+    to: 1951,
+    summary:
+      "Sir Hugh Ragg’s family property at Namosau is given to the Catholic Church, and the first secondary classes are held in a garage.",
+  },
+  {
+    id: "the-columban-fathers",
+    title: "The Columban Fathers",
+    from: 1952,
+    to: 1986,
+    summary:
+      "The Columban Fathers from Ireland open Xavier College with 24 boys and grow it into a school of 650 students.",
+  },
+  {
+    id: "the-montfort-brothers",
+    title: "The Montfort Brothers",
+    from: 1987,
+    to: 2010,
+    summary:
+      "The Montfort Brothers of St. Gabriel take over, setting national records in external exams and building the $2.2m Xavier Auditorium.",
+  },
+];

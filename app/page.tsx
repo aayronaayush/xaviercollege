@@ -1,37 +1,20 @@
 import Image from "next/image";
 import Link from "next/link";
-import heroImage from "@/public/images/hero-high-jump.jpg";
 import schoolImage from "@/public/images/school-wide.jpg";
-import ashishImage from "@/public/images/master-asish-with-pita.jpg";
-import parentsImage from "@/public/images/parents-seeing-the-team-off.jpg";
 import managerImage from "@/public/images/margaret-muller.jpg";
 
 export default function Home() {
   return (
     <>
-      <section className="hero">
-        <Image src={heroImage} alt="" fill sizes="100vw" className="hero__image" preload />
-        <span className="hero__overlay" aria-hidden="true" />
-        <p className="hero__text">
-          <a href="/docs/performance-list-xavier.pdf">Follow us</a> at CocaCola Games
-        </p>
-      </section>
-
       <div className="feature-image">
         <figure className="wide">
-          <Image src={schoolImage} alt="Xavier College students" sizes="(max-width: 1400px) 84vw, 1280px" />
+          <Image
+            src={schoolImage}
+            alt="Xavier College students"
+            sizes="(max-width: 1400px) 84vw, 1280px"
+            preload
+          />
         </figure>
-      </div>
-
-      <div className="tiled">
-        <div className="tiled__row">
-          <div className="tiled__col" style={{ flexBasis: "16.88145%" }}>
-            <Image src={ashishImage} alt="Master Ashish with Pita" sizes="17vw" />
-          </div>
-          <div className="tiled__col" style={{ flexBasis: "83.11855%" }}>
-            <Image src={parentsImage} alt="Parents seeing the team off" sizes="83vw" />
-          </div>
-        </div>
       </div>
 
       <div className="section-white" aria-hidden="true" />
