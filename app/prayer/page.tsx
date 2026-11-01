@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import SchoolPrayer from "@/components/SchoolPrayer";
+import { revealDelay } from "@/lib/reveal";
 
 export const metadata: Metadata = {
   title: "School Prayer",
@@ -40,10 +41,12 @@ export default function PrayerPage() {
 
       <section className="prayer-day gutter" aria-labelledby="prayer-day-title">
         <div className="prayer-day__inner">
-          <h2 id="prayer-day-title">When we pray</h2>
+          <h2 id="prayer-day-title" data-reveal>
+            When we pray
+          </h2>
           <ol className="moments prayer-day__list">
-            {WHEN_WE_PRAY.map((item) => (
-              <li key={item.time} className="moments__item">
+            {WHEN_WE_PRAY.map((item, index) => (
+              <li key={item.time} className="moments__item" data-reveal style={revealDelay(index + 1)}>
                 <h3 className="prayer-day__time">{item.time}</h3>
                 <p className="moments__text">{item.text}</p>
               </li>

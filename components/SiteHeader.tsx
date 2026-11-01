@@ -34,7 +34,7 @@ export default function SiteHeader() {
     <header className="site-header gutter">
       <div className="site-header__inner wide">
         <Link href="/" className="brand" onClick={() => setMenuOpen(false)}>
-          <Image src={logo} alt="" className="brand__logo" preload />
+          <Image src={logo} alt="" className="brand__logo" unoptimized preload />
           <span className="brand__text">
             <span className="brand__name">Xavier College</span>
             <span className="brand__place">Ba, Fiji</span>

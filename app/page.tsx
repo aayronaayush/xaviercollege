@@ -3,6 +3,7 @@ import Link from "next/link";
 import schoolImage from "@/public/images/school-wide.jpg";
 import managerImage from "@/public/images/margaret-muller.jpg";
 import SchoolPrayer from "@/components/SchoolPrayer";
+import { revealDelay } from "@/lib/reveal";
 
 const MOMENTS = [
   {
@@ -40,7 +41,7 @@ export default function Home() {
 
       <section className="home-story gutter" aria-labelledby="home-story-title">
         <div className="wide">
-          <div className="home-story__intro">
+          <div className="home-story__intro" data-reveal>
             <h2 id="home-story-title">A school in Ba since 1953</h2>
             <p>
               Xavier College was started by the Columban Fathers on the old Ragg family estate at
@@ -50,8 +51,8 @@ export default function Home() {
           </div>
 
           <ol className="moments">
-            {MOMENTS.map((moment) => (
-              <li key={moment.year} className="moments__item">
+            {MOMENTS.map((moment, index) => (
+              <li key={moment.year} className="moments__item" data-reveal style={revealDelay(index)}>
                 <p className="moments__year">{moment.year}</p>
                 <p className="moments__text">{moment.text}</p>
               </li>
@@ -65,7 +66,7 @@ export default function Home() {
       </section>
 
       <section className="prayer gutter" aria-labelledby="prayer-title">
-        <div className="prayer__inner">
+        <div className="prayer__inner" data-reveal>
           <h2 id="prayer-title" className="prayer__title">
             Our school prayer
           </h2>
@@ -82,14 +83,14 @@ export default function Home() {
 
       <section className="home-manager gutter" aria-labelledby="home-manager-title">
         <div className="home-manager__inner wide">
-          <figure className="home-manager__photo">
+          <figure className="home-manager__photo" data-reveal>
             <Image
               src={managerImage}
               alt="Margaret Muller, Manageress"
               sizes="(max-width: 781px) 84vw, 420px"
             />
           </figure>
-          <div className="home-manager__body">
+          <div className="home-manager__body" data-reveal style={revealDelay(1, 120)}>
             <h2 id="home-manager-title">A message from the Manager</h2>
             <blockquote className="home-manager__quote">
               <p>

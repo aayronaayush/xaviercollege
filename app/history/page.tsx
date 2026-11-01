@@ -35,7 +35,7 @@ export default function AboutPage() {
           </ol>
         </nav>
 
-        <figure className="history-intro__image wide">
+        <figure className="history-intro__image wide" data-reveal>
           <Image
             src={entranceImage}
             alt="Xavier College Entrance"
@@ -54,7 +54,7 @@ export default function AboutPage() {
 
           return (
             <section key={era.id} id={era.id} className="era" aria-labelledby={`${era.id}-title`}>
-              <div className="era__head">
+              <div className="era__head" data-reveal>
                 <p className="era__range">
                   {era.from}–{era.to}
                 </p>
@@ -66,7 +66,7 @@ export default function AboutPage() {
 
               <ol className="timeline">
                 {years.map(({ year, entries }) => (
-                  <li key={year} className="timeline__year">
+                  <li key={year} className="timeline__year" data-reveal>
                     <h3 className="timeline__label">{year}</h3>
                     {entries.length > 1 ? (
                       <ul className="timeline__entries">

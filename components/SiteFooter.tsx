@@ -16,7 +16,7 @@ export default function SiteFooter() {
       <div className="site-footer__inner wide">
         <div className="site-footer__top">
           <Link href="/" className="site-footer__brand">
-            <Image src={logo} alt="" className="site-footer__logo" />
+            <Image src={logo} alt="" className="site-footer__logo" unoptimized />
             <span>
               <span className="site-footer__name">Xavier College</span>
               <span className="site-footer__place">Ba, Fiji</span>

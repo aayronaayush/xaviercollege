@@ -94,7 +94,7 @@ export default function ManagerAddressPage() {
             </p>
           </div>
 
-          <footer className="letter__signoff">
+          <footer className="letter__signoff" data-reveal>
             <p className="letter__blessing">God bless!</p>
             <Sender />
             <p className="letter__from-date">

@@ -2,6 +2,9 @@ import type { Metadata } from "next";
 import { Fraunces, Nunito } from "next/font/google";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
+import Splash, { beforePaintScript } from "@/components/Splash";
+import SmoothScroll from "@/components/SmoothScroll";
+import Reveal from "@/components/Reveal";
 import "./globals.css";
 
 const nunito = Nunito({
@@ -27,8 +30,21 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en" data-scroll-behavior="smooth" className={`${nunito.variable} ${fraunces.variable}`}>
+    // The before-paint script adds data attributes to <html>, so React should not flag them
+    <html
+      lang="en"
+      data-scroll-behavior="smooth"
+      className={`${nunito.variable} ${fraunces.variable}`}
+      suppressHydrationWarning
+    >
       <body>
+        <script dangerouslySetInnerHTML={{ __html: beforePaintScript }} />
+        <noscript>
+          <style>{".splash{display:none}"}</style>
+        </noscript>
+        <Splash />
+        <SmoothScroll />
+        <Reveal />
         <a className="skip-link" href="#main">
           Skip to content
         </a>
