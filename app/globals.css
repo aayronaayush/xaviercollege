@@ -211,10 +211,6 @@ img {
   align-items: center;
 }
 
-.nav__panel-bar {
-  display: none;
-}
-
 .nav__pages,
 .nav__social {
   display: flex;
@@ -296,11 +292,14 @@ img {
   height: 22px;
 }
 
-.nav__toggle,
-.nav__close {
+/* Menu button: two bars that fold into an X when the menu is open */
+.nav__toggle {
+  position: relative;
   display: none;
-  padding: 10px;
-  margin: -10px;
+  width: 44px;
+  height: 44px;
+  margin-right: -10px;
+  padding: 0;
   border: 0;
   border-radius: 9999px;
   background: none;
@@ -308,12 +307,33 @@ img {
   cursor: pointer;
 }
 
-.nav__toggle svg,
-.nav__close svg {
-  display: block;
-  width: 24px;
-  height: 24px;
-  fill: currentColor;
+.nav__toggle-bar {
+  position: absolute;
+  left: 12px;
+  width: 20px;
+  height: 2px;
+  border-radius: 2px;
+  background: currentColor;
+  transition:
+    transform 0.3s cubic-bezier(0.6, 0, 0.3, 1),
+    top 0.3s cubic-bezier(0.6, 0, 0.3, 1);
+}
+
+.nav__toggle-bar:nth-child(1) {
+  top: 17px;
+}
+.nav__toggle-bar:nth-child(2) {
+  top: 25px;
+}
+
+.nav__toggle[aria-expanded="true"] .nav__toggle-bar {
+  top: 21px;
+}
+.nav__toggle[aria-expanded="true"] .nav__toggle-bar:nth-child(1) {
+  transform: rotate(45deg);
+}
+.nav__toggle[aria-expanded="true"] .nav__toggle-bar:nth-child(2) {
+  transform: rotate(-45deg);
 }
 
 @media (max-width: 781px) {
@@ -338,32 +358,48 @@ img {
     display: block;
   }
 
+  /* The menu drops down beneath the header, so the toggle stays in reach */
   .nav__panel {
-    display: none;
-  }
-
-  .nav__panel[data-open="true"] {
-    display: flex;
+    position: fixed;
+    inset: var(--header-h) 0 0 0;
+    z-index: 100;
     flex-direction: column;
     align-items: stretch;
-    position: fixed;
-    inset: 0;
-    z-index: 100;
     overflow: auto;
     padding: 0 var(--gutter) 2rem;
     background-color: var(--color-base);
+    visibility: hidden;
+    opacity: 0;
+    transform: translateY(-12px);
+    transition:
+      opacity 0.25s ease,
+      transform 0.3s cubic-bezier(0.2, 0.7, 0.2, 1),
+      visibility 0s linear 0.3s;
   }
 
-  .nav__panel-bar {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    height: var(--header-h);
-    border-bottom: 1px solid var(--color-line);
+  .nav__panel[data-open="true"] {
+    visibility: visible;
+    opacity: 1;
+    transform: none;
+    transition:
+      opacity 0.25s ease,
+      transform 0.3s cubic-bezier(0.2, 0.7, 0.2, 1),
+      visibility 0s;
   }
 
-  .nav__close {
-    display: block;
+  /* Items arrive one after another */
+  .nav__panel li {
+    opacity: 0;
+    transform: translateY(-8px);
+    transition:
+      opacity 0.3s ease,
+      transform 0.35s cubic-bezier(0.2, 0.7, 0.2, 1);
+  }
+
+  .nav__panel[data-open="true"] li {
+    opacity: 1;
+    transform: none;
+    transition-delay: calc(0.08s + var(--i, 0) * 0.05s);
   }
 
   .nav__pages {
@@ -439,8 +475,17 @@ img {
 @media (prefers-reduced-motion: reduce) {
   .nav__link,
   .nav__link::after,
-  .site-header .social__link {
+  .site-header .social__link,
+  .nav__toggle-bar {
     transition: none;
+  }
+
+  .nav__panel,
+  .nav__panel[data-open="true"],
+  .nav__panel li,
+  .nav__panel[data-open="true"] li {
+    transition: none;
+    transform: none;
   }
 }
 
@@ -1108,6 +1153,8 @@ img {
   }
 
   .home-manager__photo {
+    justify-self: center;
+    width: 100%;
     max-width: 22rem;
   }
 }

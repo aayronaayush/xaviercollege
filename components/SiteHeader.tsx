@@ -3,15 +3,19 @@
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useState, type CSSProperties } from "react";
 import logo from "@/public/images/logo.svg";
 import { FacebookLink, InstagramLink } from "./SocialLinks";
+import { setSmoothScrollPaused } from "./SmoothScroll";
 
 const NAV_ITEMS = [
   { href: "/", label: "Home" },
   { href: "/prayer", label: "Our Prayer" },
   { href: "/history", label: "Our History" },
 ];
+
+// Position in the menu, used to stagger items as the menu opens
+const itemIndex = (index: number) => ({ "--i": index }) as CSSProperties;
 
 export default function SiteHeader() {
   const pathname = usePathname();
@@ -24,9 +28,11 @@ export default function SiteHeader() {
     };
     document.addEventListener("keydown", onKeyDown);
     document.body.style.overflow = "hidden";
+    setSmoothScrollPaused(true);
     return () => {
       document.removeEventListener("keydown", onKeyDown);
       document.body.style.overflow = "";
+      setSmoothScrollPaused(false);
     };
   }, [menuOpen]);
 
@@ -42,38 +48,23 @@ export default function SiteHeader() {
         </Link>
 
         <nav className="nav" aria-label="Main">
+          {/* Two bars that fold into an X while the menu is open */}
           <button
             type="button"
             className="nav__toggle"
-            aria-label="Open menu"
-            aria-haspopup="dialog"
+            aria-label={menuOpen ? "Close menu" : "Open menu"}
             aria-expanded={menuOpen}
-            onClick={() => setMenuOpen(true)}
+            aria-controls="site-menu"
+            onClick={() => setMenuOpen((open) => !open)}
           >
-            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-              <path d="M4 7.5h16v1.5H4z" />
-              <path d="M4 15h16v1.5H4z" />
-            </svg>
+            <span className="nav__toggle-bar" aria-hidden="true" />
+            <span className="nav__toggle-bar" aria-hidden="true" />
           </button>
 
-          <div className="nav__panel" data-open={menuOpen}>
-            <div className="nav__panel-bar">
-              <span className="brand__name">Xavier College</span>
-              <button
-                type="button"
-                className="nav__close"
-                aria-label="Close menu"
-                onClick={() => setMenuOpen(false)}
-              >
-                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-                  <path d="m13.06 12 6.47-6.47-1.06-1.06L12 10.94 5.53 4.47 4.47 5.53 10.94 12l-6.47 6.47 1.06 1.06L12 13.06l6.47 6.47 1.06-1.06L13.06 12Z" />
-                </svg>
-              </button>
-            </div>
-
+          <div id="site-menu" className="nav__panel" data-open={menuOpen}>
             <ul className="nav__pages">
-              {NAV_ITEMS.map((item) => (
-                <li key={item.href}>
+              {NAV_ITEMS.map((item, index) => (
+                <li key={item.href} style={itemIndex(index)}>
                   <Link
                     href={item.href}
                     className="nav__link"
@@ -87,10 +78,10 @@ export default function SiteHeader() {
             </ul>
 
             <ul className="nav__social" aria-label="Follow Xavier College">
-              <li>
+              <li style={itemIndex(NAV_ITEMS.length)}>
                 <FacebookLink />
               </li>
-              <li>
+              <li style={itemIndex(NAV_ITEMS.length + 1)}>
                 <InstagramLink />
               </li>
             </ul>
