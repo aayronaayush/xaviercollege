@@ -3,35 +3,90 @@ import Link from "next/link";
 import schoolImage from "@/public/images/school-wide.jpg";
 import managerImage from "@/public/images/margaret-muller.jpg";
 
+const MOMENTS = [
+  {
+    year: "1952",
+    text: "Over 70 applicants sit the first entrance examination and 24 boys are accepted.",
+  },
+  {
+    year: "1970",
+    text: "The first girls start at Xavier College, and the College Magazine is produced.",
+  },
+  {
+    year: "1997",
+    text: "The first school in Fiji to achieve a 100% pass in the Fiji Seventh Form Examination.",
+  },
+];
+
 export default function Home() {
   return (
     <>
-      <div className="feature-image">
-        <figure className="wide">
+      <section className="home-hero gutter">
+        <figure className="home-hero__frame wide">
           <Image
             src={schoolImage}
-            alt="Xavier College students"
+            alt="The main Xavier College building and driveway"
             sizes="(max-width: 1400px) 84vw, 1280px"
+            className="home-hero__image"
             preload
           />
+          <figcaption className="home-hero__notch">
+            <h1 className="home-hero__title">Do your best and leave the rest to God.</h1>
+            <p className="home-hero__credit">The Xavier saying, coined by Bro. P.J. George</p>
+          </figcaption>
         </figure>
-      </div>
+      </section>
 
-      <div className="section-white" aria-hidden="true" />
-
-      <section className="section-white">
-        <div className="media-text content">
-          <figure className="media-text__media">
-            <Image src={managerImage} alt="Margaret Muller, Manageress" sizes="(max-width: 600px) 100vw, 310px" />
-          </figure>
-          <div className="media-text__content">
+      <section className="home-story gutter" aria-labelledby="home-story-title">
+        <div className="wide">
+          <div className="home-story__intro">
+            <h2 id="home-story-title">A school in Ba since 1953</h2>
             <p>
-              I accepted the Manager’s position with a lot of apprehension knowing full well the huge
-              shoes I had to fill and the thought was very much overwhelming. It was only the love
-              for the school that I courageously decided to accept the invitation from the then
-              titular Manager, Fr. Pat Colgan, under the Archdiocese of Suva. All my efforts since
-              assuming Manager is geared towards upholding the culture of excellence instilled by the
-              Montfort Brothers. <Link href="/manager-address">Read More</Link>
+              Xavier College was started by the Columban Fathers on the old Ragg family estate at
+              Namosau. The Montfort Brothers of St. Gabriel led it from 1987, and the Archdiocese of
+              Suva has managed it since 2021.
+            </p>
+          </div>
+
+          <ol className="moments">
+            {MOMENTS.map((moment) => (
+              <li key={moment.year} className="moments__item">
+                <p className="moments__year">{moment.year}</p>
+                <p className="moments__text">{moment.text}</p>
+              </li>
+            ))}
+          </ol>
+
+          <p className="home-story__more">
+            <Link href="/about">Read our full history</Link>
+          </p>
+        </div>
+      </section>
+
+      <section className="home-manager gutter" aria-labelledby="home-manager-title">
+        <div className="home-manager__inner wide">
+          <figure className="home-manager__photo">
+            <Image
+              src={managerImage}
+              alt="Margaret Muller, Manageress"
+              sizes="(max-width: 781px) 84vw, 420px"
+            />
+          </figure>
+          <div className="home-manager__body">
+            <h2 id="home-manager-title">A message from the Manager</h2>
+            <blockquote className="home-manager__quote">
+              <p>
+                I accepted the Manager’s position with a lot of apprehension knowing full well the
+                huge shoes I had to fill and the thought was very much overwhelming. It was only the
+                love for the school that I courageously decided to accept the invitation from the
+                then titular Manager, Fr. Pat Colgan, under the Archdiocese of Suva. All my efforts
+                since assuming Manager is geared towards upholding the culture of excellence
+                instilled by the Montfort Brothers.
+              </p>
+            </blockquote>
+            <p className="home-manager__name">Margaret Muller, Manageress</p>
+            <p>
+              <Link href="/manager-address">Read the full message</Link>
             </p>
           </div>
         </div>

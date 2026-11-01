@@ -9,7 +9,6 @@ import { FacebookLink, InstagramLink } from "./SocialLinks";
 
 const NAV_ITEMS = [
   { href: "/", label: "Home" },
-  { href: "/media-gallery", label: "Media Gallery" },
   { href: "/about", label: "Our Rich History" },
 ];
 

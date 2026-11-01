@@ -354,105 +354,244 @@ img {
   padding-bottom: var(--spacing-50);
 }
 
-/* ---------- Home: sections ---------- */
+/* ---------- Home ---------- */
 
-.feature-image {
-  padding: var(--spacing-50);
+.home-hero {
+  padding-top: var(--spacing-20);
 }
 
-.feature-image img {
-  width: 100%;
+.home-hero__frame {
+  --notch-r: var(--radius-rounded);
+  position: relative;
+  overflow: hidden;
   border-radius: var(--radius-rounded);
 }
 
-.section-white {
-  background-color: var(--color-base-2);
-  padding: var(--spacing-50);
-}
-
-/* ---------- Tiled gallery ---------- */
-
-.tiled {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-
-.tiled__row {
-  display: flex;
-  gap: 4px;
-}
-
-.tiled__col {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 4px;
-  min-width: 0;
-}
-
-.tiled__col img {
+.home-hero__image {
   width: 100%;
-  height: auto;
+  aspect-ratio: 16 / 8.5;
+  object-fit: cover;
 }
 
-@media (max-width: 599px) {
-  .tiled--stack-mobile .tiled__row {
-    flex-direction: column;
-  }
-  .tiled--stack-mobile .tiled__col {
-    flex-basis: auto !important;
-  }
+/* The headline sits in a notch cut out of the photo's bottom-left corner */
+.home-hero__notch {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  max-width: min(36rem, 62%);
+  padding: 1.75rem 2.25rem 0 0;
+  background: var(--color-base);
+  border-top-right-radius: var(--notch-r);
 }
 
-/* ---------- Media + text ---------- */
+.home-hero__notch::before,
+.home-hero__notch::after {
+  content: "";
+  position: absolute;
+  width: var(--notch-r);
+  height: var(--notch-r);
+  background: radial-gradient(
+    circle at 100% 0,
+    transparent calc(var(--notch-r) - 0.5px),
+    var(--color-base) var(--notch-r)
+  );
+}
+.home-hero__notch::before {
+  top: calc(var(--notch-r) * -1);
+  left: 0;
+}
+.home-hero__notch::after {
+  right: calc(var(--notch-r) * -1);
+  bottom: 0;
+}
 
-.media-text {
+.home-hero__title {
+  font-size: clamp(2.3rem, 1.1rem + 3.6vw, 4.4rem);
+  line-height: 1.02;
+  letter-spacing: -0.015em;
+  font-variation-settings: "SOFT" 100, "opsz" 144;
+  text-wrap: balance;
+}
+
+.home-hero__credit {
+  margin-top: 0.9rem;
+  color: var(--color-contrast-2);
+}
+
+.home-story {
+  padding-top: var(--spacing-50);
+  padding-bottom: var(--spacing-50);
+}
+
+.home-story__intro {
   display: grid;
-  grid-template-columns: 50% 1fr;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+  gap: var(--spacing-40);
+  align-items: start;
+}
+
+.home-story__intro p {
+  max-width: 34rem;
+  font-size: 1.15rem;
+  line-height: 1.6;
+}
+
+/* A short run of the timeline: line along the top, a dot per year */
+.moments {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--spacing-30);
+  margin: var(--spacing-40) 0 0;
+  padding: 0;
+  list-style: none;
+  border-top: 2px solid var(--color-line);
+}
+
+.moments__item {
+  position: relative;
+  padding-top: 1.75rem;
+}
+
+.moments__item::before {
+  content: "";
+  position: absolute;
+  top: -7px;
+  left: 0;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--color-crest);
+  box-shadow: 0 0 0 5px var(--color-base);
+}
+
+.moments__year {
+  font-family: var(--font-heading), serif;
+  font-size: clamp(2.4rem, 1.8rem + 1.6vw, 3.4rem);
+  font-weight: 300;
+  line-height: 1;
+  font-variation-settings: "SOFT" 100, "opsz" 144;
+}
+
+.moments__text {
+  max-width: 22rem;
+  margin-top: 0.75rem;
+  color: var(--color-contrast-2);
+}
+
+.home-story__more {
+  margin-top: var(--spacing-40);
+  font-weight: 600;
+}
+
+.home-story__more a,
+.home-manager a {
+  color: var(--color-crest);
+  text-underline-offset: 0.2em;
+}
+
+.home-manager {
+  padding-top: var(--spacing-50);
+  padding-bottom: var(--spacing-50);
+  background: var(--color-base-2);
+}
+
+.home-manager__inner {
+  display: grid;
+  grid-template-columns: minmax(0, 4fr) minmax(0, 7fr);
+  gap: var(--spacing-50);
   align-items: center;
 }
 
-.media-text__media img {
+.home-manager__photo img {
   width: 100%;
-  height: auto;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  border-radius: var(--radius-rounded);
 }
 
-.media-text__content {
-  padding: 0 8%;
+.home-manager__body {
+  max-width: 36rem;
 }
 
-@media (max-width: 599px) {
-  .media-text {
-    grid-template-columns: 100%;
-  }
-  .media-text__content {
-    padding: 8% 0;
-  }
+.home-manager__quote {
+  margin: 1.5rem 0 0;
+  padding-left: 1.25rem;
+  border-left: 3px solid var(--color-crest);
 }
 
-/* ---------- Columns ---------- */
-
-.columns {
-  display: flex;
-  gap: var(--block-gap);
+.home-manager__quote p {
+  font-size: 1.15rem;
+  line-height: 1.65;
 }
 
-.columns > .col-third {
-  flex: 0 0 calc((100% - var(--block-gap)) / 3);
-  min-width: 0;
+.home-manager__name {
+  margin-top: 1.25rem;
+  margin-bottom: 1rem;
+  color: var(--color-contrast-2);
 }
-.columns > .col-two-thirds {
-  flex: 1 1 0;
-  min-width: 0;
+
+.home-manager__body > p:last-child {
+  font-weight: 600;
 }
 
 @media (max-width: 781px) {
-  .columns {
-    flex-direction: column;
+  .home-hero__image {
+    aspect-ratio: 4 / 3;
   }
-  .columns > .col-third {
-    flex-basis: auto;
+
+  .home-hero__frame {
+    overflow: visible;
+    border-radius: 0;
+  }
+
+  .home-hero__image {
+    border-radius: var(--radius-rounded);
+  }
+
+  .home-hero__notch {
+    position: static;
+    max-width: none;
+    padding: 1.5rem 0 0;
+    background: none;
+  }
+
+  .home-hero__notch::before,
+  .home-hero__notch::after {
+    display: none;
+  }
+
+  .home-story__intro,
+  .home-manager__inner {
+    grid-template-columns: 1fr;
+  }
+
+  .home-story__intro {
+    gap: 1rem;
+  }
+
+  .moments {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    border-top: 0;
+    border-left: 2px solid var(--color-line);
+    padding-left: 1.75rem;
+  }
+
+  .moments__item {
+    padding-top: 0;
+  }
+
+  .moments__item::before {
+    top: 0.9rem;
+    left: calc(-1.75rem - 7px);
+  }
+
+  .home-manager__inner {
+    gap: var(--spacing-30);
+  }
+
+  .home-manager__photo {
+    max-width: 22rem;
   }
 }
 
@@ -691,26 +830,4 @@ ul.timeline__entries > li::before {
   .era-nav a {
     transition: none;
   }
-}
-
-/* ---------- Media gallery ---------- */
-
-.gallery-intro {
-  padding: calc(var(--gutter) * 0.5) var(--gutter);
-}
-
-.gallery-intro__text {
-  padding: var(--spacing-20) 0;
-}
-
-.gallery-section {
-  padding: calc(var(--gutter) * 0.5) var(--gutter);
-}
-
-.gallery-section__title em {
-  font-style: italic;
-}
-
-.gallery-section ul {
-  padding-left: 1.2em;
 }
