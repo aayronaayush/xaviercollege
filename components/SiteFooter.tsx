@@ -1,12 +1,12 @@
 import Image from "next/image";
 import Link from "next/link";
-import logo from "@/public/images/logo.png";
+import logo from "@/public/images/logo.svg";
 import { FacebookLink, InstagramLink } from "./SocialLinks";
 
 const PAGES = [
   { href: "/", label: "Home" },
-  { href: "/prayer", label: "Prayer" },
-  { href: "/history", label: "History" },
+  { href: "/prayer", label: "Our Prayer" },
+  { href: "/history", label: "Our History" },
   { href: "/manager-address", label: "Manager’s message" },
 ];
 

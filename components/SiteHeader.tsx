@@ -4,13 +4,13 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
-import logo from "@/public/images/logo.png";
+import logo from "@/public/images/logo.svg";
 import { FacebookLink, InstagramLink } from "./SocialLinks";
 
 const NAV_ITEMS = [
   { href: "/", label: "Home" },
-  { href: "/prayer", label: "Prayer" },
-  { href: "/history", label: "History" },
+  { href: "/prayer", label: "Our Prayer" },
+  { href: "/history", label: "Our History" },
 ];
 
 export default function SiteHeader() {
