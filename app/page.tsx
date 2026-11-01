@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import schoolImage from "@/public/images/school-wide.jpg";
 import managerImage from "@/public/images/margaret-muller.jpg";
+import SchoolPrayer from "@/components/SchoolPrayer";
 
 const MOMENTS = [
   {
@@ -58,7 +59,23 @@ export default function Home() {
           </ol>
 
           <p className="home-story__more">
-            <Link href="/about">Read our full history</Link>
+            <Link href="/history">Read our full history</Link>
+          </p>
+        </div>
+      </section>
+
+      <section className="prayer gutter" aria-labelledby="prayer-title">
+        <div className="prayer__inner">
+          <h2 id="prayer-title" className="prayer__title">
+            Our school prayer
+          </h2>
+          <p className="prayer__context">
+            We say this prayer to begin and end every school day and before every school event.
+            Each morning it is joined by a verse from the Bible.
+          </p>
+          <SchoolPrayer />
+          <p className="prayer__more">
+            <Link href="/prayer">More about our school prayer</Link>
           </p>
         </div>
       </section>

@@ -21,7 +21,7 @@ export function FacebookLink() {
   return (
     <a href={FACEBOOK_URL} className="social__link social__link--facebook" rel="noopener">
       <FacebookIcon />
-      <span className="screen-reader-text">Facebook</span>
+      <span className="social__label screen-reader-text">Facebook</span>
     </a>
   );
 }
@@ -30,20 +30,7 @@ export function InstagramLink() {
   return (
     <a href={INSTAGRAM_URL} className="social__link social__link--instagram" rel="noopener">
       <InstagramIcon />
-      <span className="screen-reader-text">Instagram</span>
+      <span className="social__label screen-reader-text">Instagram</span>
     </a>
-  );
-}
-
-export default function SocialLinks() {
-  return (
-    <ul className="social">
-      <li>
-        <FacebookLink />
-      </li>
-      <li>
-        <InstagramLink />
-      </li>
-    </ul>
   );
 }

@@ -9,7 +9,8 @@ import { FacebookLink, InstagramLink } from "./SocialLinks";
 
 const NAV_ITEMS = [
   { href: "/", label: "Home" },
-  { href: "/about", label: "Our Rich History" },
+  { href: "/prayer", label: "Prayer" },
+  { href: "/history", label: "History" },
 ];
 
 export default function SiteHeader() {
@@ -32,17 +33,15 @@ export default function SiteHeader() {
   return (
     <header className="site-header gutter">
       <div className="site-header__inner wide">
-        <div className="brand">
-          <Link href="/" aria-current={pathname === "/" ? "page" : undefined}>
-            <Image src={logo} alt="Xavier College Logo" className="brand__logo" preload />
-          </Link>
-          <div className="brand__name">
-            <h3>Xavier</h3>
-            <h3>College</h3>
-          </div>
-        </div>
+        <Link href="/" className="brand" onClick={() => setMenuOpen(false)}>
+          <Image src={logo} alt="" className="brand__logo" preload />
+          <span className="brand__text">
+            <span className="brand__name">Xavier College</span>
+            <span className="brand__place">Ba, Fiji</span>
+          </span>
+        </Link>
 
-        <nav className="nav" aria-label="Navigation">
+        <nav className="nav" aria-label="Main">
           <button
             type="button"
             className="nav__toggle"
@@ -58,21 +57,26 @@ export default function SiteHeader() {
           </button>
 
           <div className="nav__panel" data-open={menuOpen}>
-            <button
-              type="button"
-              className="nav__close"
-              aria-label="Close menu"
-              onClick={() => setMenuOpen(false)}
-            >
-              <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-                <path d="m13.06 12 6.47-6.47-1.06-1.06L12 10.94 5.53 4.47 4.47 5.53 10.94 12l-6.47 6.47 1.06 1.06L12 13.06l6.47 6.47 1.06-1.06L13.06 12Z" />
-              </svg>
-            </button>
-            <ul className="nav__list">
+            <div className="nav__panel-bar">
+              <span className="brand__name">Xavier College</span>
+              <button
+                type="button"
+                className="nav__close"
+                aria-label="Close menu"
+                onClick={() => setMenuOpen(false)}
+              >
+                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                  <path d="m13.06 12 6.47-6.47-1.06-1.06L12 10.94 5.53 4.47 4.47 5.53 10.94 12l-6.47 6.47 1.06 1.06L12 13.06l6.47 6.47 1.06-1.06L13.06 12Z" />
+                </svg>
+              </button>
+            </div>
+
+            <ul className="nav__pages">
               {NAV_ITEMS.map((item) => (
                 <li key={item.href}>
                   <Link
                     href={item.href}
+                    className="nav__link"
                     aria-current={pathname === item.href ? "page" : undefined}
                     onClick={() => setMenuOpen(false)}
                   >
@@ -80,6 +84,9 @@ export default function SiteHeader() {
                   </Link>
                 </li>
               ))}
+            </ul>
+
+            <ul className="nav__social" aria-label="Follow Xavier College">
               <li>
                 <FacebookLink />
               </li>
